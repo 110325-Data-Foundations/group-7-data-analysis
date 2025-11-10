@@ -22,4 +22,7 @@ def analyze_data(file_path):
     # check data types
     data = data.convert_dtypes()
 
+    # save updated csv
+    data.to_csv('cleaned_data.csv', index=False)
+
     print(data.head())
