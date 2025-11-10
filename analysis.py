@@ -13,12 +13,19 @@ def analyze_data(file_path):
     # Load the data
     data = pd.read_csv(file_path)
 
+    # get columns
+    columns = data.columns.tolist()
+    print(f"Columns in the dataset: {columns}")
+
     # Clean data
     data = data.dropna()
 
-    # count duplicates
-    duplicate_count = data.duplicated().sum()
-    print(f"Number of duplicate rows: {duplicate_count}")
+    # count duplicates for each column
+        # count duplicates for each column
+    for col in columns:
+        col_dup_count = data[col].duplicated().sum()
+        print(f"Number of duplicate values in column '{col}': {col_dup_count}")
+    
     
     #remove duplicates
     data = data.drop_duplicates()
