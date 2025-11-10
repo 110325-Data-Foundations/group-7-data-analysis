@@ -15,9 +15,17 @@ def analyze_data(file_path):
 
     # Clean data
     data = data.dropna()
+
+    # count duplicates
+    duplicate_count = data.duplicated().sum()
+    print(f"Number of duplicate rows: {duplicate_count}")
     
     #remove duplicates
     data = data.drop_duplicates()
+
+    # count duplicates after removal
+    duplicate_count_after = data.duplicated().sum()
+    print(f"Number of duplicate rows after removal: {duplicate_count_after}")
 
     # check data types
     data = data.convert_dtypes()
@@ -26,3 +34,5 @@ def analyze_data(file_path):
     data.to_csv('cleaned_data.csv', index=False)
 
     print(data.head())
+
+analyze_data('dataset.csv')
