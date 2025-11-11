@@ -42,4 +42,15 @@ def analyze_data(file_path):
 
     print(data.head())
 
+def simplify_data(file_path):
+    df = pd.read_csv(file_path)
+
+    df.drop(columns=['City','CO AQI Value','CO AQI Category','Ozone AQI Value','Ozone AQI Category','NO2 AQI Value','NO2 AQI Category','PM2.5 AQI Value','PM2.5 AQI Category'], inplace=True)
+
+    country_aqi_df = df.groupby('Country', as_index=False)['AQI Value'].mean().rename(columns={'AQI Value': 'Average AQI'}).round(1)
+
+    country_aqi_df.to_csv('Country_AQI_data.csv', index=False)
+
+simplify_data('dataset.csv')
+
 analyze_data('dataset.csv')
