@@ -48,6 +48,10 @@ def simplify_data(file_path):
     df.drop(columns=['City','CO AQI Value','CO AQI Category','Ozone AQI Value','Ozone AQI Category','NO2 AQI Value','NO2 AQI Category','PM2.5 AQI Value','PM2.5 AQI Category'], inplace=True)
 
     country_aqi_df = df.groupby('Country', as_index=False)['AQI Value'].mean().rename(columns={'AQI Value': 'Average AQI'}).round(1)
+    #df.groupby()
+    #df['AQI Value'].mean()
+    #df.rename()
+    #df.round()
 
     country_aqi_df.to_csv('Country_AQI_data.csv', index=False)
 
@@ -117,7 +121,7 @@ def split_by_continent(file_path):
         filename = f"{continent.replace(' ', '_')}_AQI.csv" #create file for each continent
         sub_df.to_csv(filename, index=False) #create csv file in repo based on the sub dataframe from main df
 
-simplify_data('dataset.csv')
+simplify_data('cleaned_data.csv')
 split_by_continent('Country_AQI_data.csv')
 
 analyze_data('dataset.csv')
